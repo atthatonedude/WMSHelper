@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:WMS_Helper_Application"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        
          
     </Application.Resources>
 </Application>

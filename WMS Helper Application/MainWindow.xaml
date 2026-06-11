@@ -5,8 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WMS_Helper_Application"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="800">
     <Grid>
-
+        <Menu>
+            <MenuItem Header="File">
+                
+            </MenuItem>
+            <MenuItem Header="Print">
+                <MenuItem Command="ApplicationCommands.Print"></MenuItem>
+            </MenuItem>
+        </Menu>
+        <StackPanel CanVerticallyScroll="True"></StackPanel>
     </Grid>
 </Window>
