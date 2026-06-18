@@ -15,6 +15,21 @@
                 <MenuItem Command="ApplicationCommands.Print"></MenuItem>
             </MenuItem>
         </Menu>
-        <StackPanel CanVerticallyScroll="True"></StackPanel>
+        
+        <StackPanel CanVerticallyScroll="False">
+            <Menu>
+                <MenuItem Header="File">
+                // TODO CREATE FILE OPTIONS
+                </MenuItem>
+                
+                <MenuItem Header="Print">
+                    //TODO: CREATE COMMAND LOGIC TO PRINT PAGE
+                    <MenuItem Command="ApplicationCommands.Print"></MenuItem>                    
+                </MenuItem>
+            </Menu>
+            
+            <TextBox>Name:</TextBox>
+            
+        </StackPanel>
     </Grid>
 </Window>
