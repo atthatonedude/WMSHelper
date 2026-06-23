@@ -20,5 +20,10 @@ namespace WMS_Helper_Application
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
