@@ -1,0 +1,40 @@
+﻿using System;
+
+public class BankAccount
+{
+    // Instance fields unique to each object
+    private string _accountHolder;
+    private decimal _balance;
+
+    // Constructor to initialize the object
+    public BankAccount(string holder, decimal initialBalance)
+    {
+        _accountHolder = holder;
+        _balance = initialBalance;
+    }
+
+    // Custom instance method
+    public void Deposit(decimal amount)
+    {
+        if (amount <= 0)
+        {
+            throw new ArgumentException("Deposit amount must be positive.");
+        }
+
+        // Modifies the instance's specific state
+        _balance += amount; 
+        Console.WriteLine($"{_accountHolder} deposited {amount:C}. New balance: {_balance:C}");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // Instantiating the object
+        BankAccount account = new BankAccount("Alice", 500.00m);
+
+        // Calling the custom instance method
+        account.Deposit(150.50m); 
+    }
+}
