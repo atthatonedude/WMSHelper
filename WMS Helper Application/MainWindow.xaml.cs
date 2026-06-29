@@ -23,16 +23,23 @@ namespace WMS_Helper_Application
         public ObservableCollection<BarcodeModel> barcodeModels { get; } = new();
         public MainWindow()
         {
+            Seed();
             InitializeComponent();
             DataContext = this;
         }
 
         public void Seed()
         {
-            var seed = new[] 
+            var seed = new[]
             {
-                new BarcodeModel("6500A",25001,)
+                new BarcodeModel("teststring",11997, 2002021),
+                new BarcodeModel("test2",11252, 2002210),
+                new BarcodeModel("test3",11252, 235125)
             };
+
+            foreach (var item in seed) {
+               barcodeModels.Add(item);
+            }
 
         }
 
