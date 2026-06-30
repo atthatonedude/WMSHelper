@@ -46,17 +46,20 @@ namespace WMS_Helper_Application
 
 
 
-        private void printBtn_Click(object sender, RoutedEventArgs e)
+        
+
+        private void AddItemBtn_Click(object sender, RoutedEventArgs e)
         {
+            AddItemWindow itemWindow = new AddItemWindow();
+
+            itemWindow.Owner = this;
+            itemWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+
+            bool? returnedValue = itemWindow.ShowDialog();
 
         }
 
-        private void addItemBtn_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void addItemBtn_Click_1(object sender, RoutedEventArgs e)
         {
 
         }

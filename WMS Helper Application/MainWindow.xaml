@@ -31,16 +31,17 @@
                 <MenuItem Command="ApplicationCommands.Print"></MenuItem>
             </MenuItem>
         </Menu>
+        
 
         <Label Content="Item Name"  Name="itemsLabel" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Grid.Column="0"  />
-        <ListBox Grid.Row="1" Grid.Column="0" Height="350" Width="200" ItemsSource="{Binding barcodeModels }" SelectionChanged="ListBox_SelectionChanged"></ListBox>
+        <ListBox Grid.Row="1" Grid.Column="0" Height="350" Width="200" ItemsSource="{Binding barcodeModels }" DisplayMemberPath="ItemName"></ListBox>
 
 
         <Label  Name="itemsMovedLabel" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" Content="Items to Print"  />
         <ListBox Grid.Row="1" Grid.Column="1" Height="350" Width="200"/>
 
-        <Button Name="addItemBtn" Content="Add Item"  Grid.Row="2" Grid.Column="0" Height="50" Width="150" Click="addItemBtn_Click"/>
-        <Button Name="printBtn" Content="Print" Grid.Row="2" Grid.Column="1" Height="50" Width="150" Click="printBtn_Click"/>
+        <Button Name="addItemBtn" Content="Add Item"  Grid.Row="2" Grid.Column="0" Height="50" Width="150" Click="AddItemBtn_Click" />
+        <Button Name="printBtn" Content="Print" Grid.Row="2" Grid.Column="1" Height="50" Width="150"/>
 
         <Image Source="/MiscFiles/right-arrow.png" Grid.ColumnSpan="2" Margin="255,192,255,192" Grid.Row="1"/>
         

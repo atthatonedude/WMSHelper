@@ -7,18 +7,19 @@ namespace WMS_Helper_Application.Model
 {
     public class BarcodeModel
     {   
-        //instances with validation
+        //instance with validation
         private string itemNumberToBarcode;
+        
 
-        public BarcodeModel(string name, int itemNumber,string itemNumberToBarcode, int itemPurchaseOrder) 
+        public BarcodeModel(string name, int itemNumber, int itemPurchaseOrder) 
         {
-            Name = name;
+            ItemName = name;
             ItemNumber = itemNumber;
-            
-            ItemPurchaseOrderNumber = itemPurchaseOrder;
+            ItemPurchaseOrderNumber = itemNumber;
+            this.itemNumberToBarcode = itemNumber.ToString();
         }
 
-        public string Name {  get; set; }
+        public string ItemName {  get; set; }
 
         public int ItemNumber { get;set;  }
 
@@ -31,7 +32,7 @@ namespace WMS_Helper_Application.Model
 
             set 
             {
-                if (!value.Contains("*")) 
+                if (value.Contains("*")) 
                 {
                     throw new ArgumentException("String cannot contain the * character");
                 }
