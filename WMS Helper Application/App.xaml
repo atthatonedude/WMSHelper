@@ -4,7 +4,19 @@
              xmlns:local="clr-namespace:WMS_Helper_Application"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        
-         
+        <ResourceDictionary>
+            
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/PresentationFramework.Fluent;component/Themes/Fluent.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style TargetType="ListBox" BasedOn="{DynamicResource {x:Type ListBox}}">
+                <Setter Property="BorderThickness" Value="1" />
+                
+                
+            </Style>
+            
+        </ResourceDictionary>
+
     </Application.Resources>
 </Application>

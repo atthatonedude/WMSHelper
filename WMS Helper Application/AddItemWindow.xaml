@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:WMS_Helper_Application"
         
         mc:Ignorable="d"
-        Title="AddItemWindow" Height="300" Width="400">
+        Title="AddItemWindow" Height="500" Width="600"
+        FontSize="20">
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -14,21 +16,38 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="3*"/>
             
         </Grid.RowDefinitions>
 
-
-
         
-                   
+        <Label Grid.Row="0" Content="Item Name :" Margin="0,0,8,0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <TextBox Name="itemNameTB" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Height="20" Width="200"/>
+        
+        <Label Grid.Row="1" Content="Item Number :" Margin="0,0,8,0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <TextBox  Name="itemNumberTB" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Height="20" Width="200"/>
+        
+        
+        <Label Grid.Row="2" Content="Item Purchase Order Number :" Margin="0,0,8,0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <TextBox  Name="itemPurchaseOrderTB" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Height="20" Width="200"/>
+
+        <StackPanel Grid.ColumnSpan="2" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Add Item" HorizontalAlignment="Center" Width="100" Margin="10"/>
+            <Button Content="Back" HorizontalAlignment="Center" Width="100" Margin="10"/>
             
-        
-        
-        
-        
+        </StackPanel>
+
+
+
+
+
+
+
+
+
+
     </Grid>
 </Window>
