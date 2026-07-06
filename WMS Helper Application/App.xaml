@@ -10,12 +10,20 @@
                 <ResourceDictionary Source="/PresentationFramework.Fluent;component/Themes/Fluent.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
-            <Style TargetType="ListBox" BasedOn="{DynamicResource {x:Type ListBox}}">
-                <Setter Property="BorderThickness" Value="1" />
-                
-                
+            <Style x:Key="BorderedListBox" TargetType="ListBox" BasedOn="{StaticResource {x:Type ListBox}}">
+                <Setter Property="BorderThickness" Value="2" />
+                <Setter Property="BorderBrush" Value="Gray"/>
+
+
             </Style>
-            
+
+            <Style x:Key="BorderTextBox" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                <Setter Property="BorderThickness" Value="2" />
+                <Setter Property="BorderBrush" Value="Gray"/>
+
+
+            </Style>
+
         </ResourceDictionary>
 
     </Application.Resources>

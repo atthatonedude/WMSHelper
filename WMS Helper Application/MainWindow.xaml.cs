@@ -20,7 +20,8 @@ namespace WMS_Helper_Application
 
         //instantiates barmmodels collection
     {
-        public ObservableCollection<BarcodeModel> barcodeModels { get; } = new();
+        public ObservableCollection<BarcodeModel> AvailableBarcodeModels { get; } = new();
+        public ObservableCollection<BarcodeModel> SelectedBarcodeModels { get; } = new();
         public MainWindow()
         {
             Seed();
@@ -38,7 +39,7 @@ namespace WMS_Helper_Application
             };
 
             foreach (var item in seed) {
-               barcodeModels.Add(item);
+               AvailableBarcodeModels.Add(item);
             }
 
         }
@@ -59,9 +60,6 @@ namespace WMS_Helper_Application
 
         }
 
-        private void addItemBtn_Click_1(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
     }
 }
