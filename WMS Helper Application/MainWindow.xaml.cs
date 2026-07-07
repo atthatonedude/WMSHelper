@@ -20,29 +20,15 @@ namespace WMS_Helper_Application
 
         //instantiates barmmodels collection
     {
-        public ObservableCollection<BarcodeModel> AvailableBarcodeModels { get; } = new();
-        public ObservableCollection<BarcodeModel> SelectedBarcodeModels { get; } = new();
+        
         public MainWindow()
         {
-            Seed();
+            
             InitializeComponent();
-            DataContext = this;
+            DataContext = Application.Current;
         }
 
-        public void Seed()
-        {
-            var seed = new[]
-            {
-                new BarcodeModel("teststring",11997, 2002021),
-                new BarcodeModel("test2",11252, 2002210),
-                new BarcodeModel("test3",11252, 235125)
-            };
-
-            foreach (var item in seed) {
-               AvailableBarcodeModels.Add(item);
-            }
-
-        }
+        
 
 
 
