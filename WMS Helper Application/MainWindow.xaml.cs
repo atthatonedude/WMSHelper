@@ -46,6 +46,24 @@ namespace WMS_Helper_Application
 
         }
 
-        
+        private void AvailableBarcodeLB_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (AvailableBarcodeLB.SelectedItem is BarcodeModel item)
+            {
+                var app = (App)Application.Current;
+                app.AvailableBarcodeModels.Remove(item);
+                app.SelectedBarcodeModels.Add(item);
+            }
+        }
+
+        private void SelectedBarcodeLB_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (SelectedBarcodeLB.SelectedItem is BarcodeModel item)
+            {
+                var app = (App)Application.Current;
+                app.SelectedBarcodeModels.Remove(item);
+                app.AvailableBarcodeModels.Add(item);
+            }
+        }
     }
 }

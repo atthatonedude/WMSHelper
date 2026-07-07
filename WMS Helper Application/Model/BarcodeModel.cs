@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace WMS_Helper_Application.Model
 {
-    public class BarcodeModel
+    public class BarcodeModel : INotifyPropertyChanged
     {   
         //instance with validation
         private string itemNumberToBarcode;
@@ -15,7 +16,7 @@ namespace WMS_Helper_Application.Model
         {
             ItemName = name;
             ItemNumber = itemNumber;
-            ItemPurchaseOrderNumber = itemNumber;
+            ItemPurchaseOrderNumber = itemPurchaseOrder;
             this.itemNumberToBarcode = itemNumber.ToString();
         }
 
@@ -47,8 +48,8 @@ namespace WMS_Helper_Application.Model
         
         }
 
-
-
-        
+        public event PropertyChangedEventHandler? PropertyChanged;
+        void OnPropertyChanged([CallerMemberName] string? name = null) =>
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }

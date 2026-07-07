@@ -7,10 +7,11 @@
         
         mc:Ignorable="d"
         Title="AddItemWindow" Height="500" Width="600"
-        FontSize="20">
+        FontSize="16">
     <Window.Resources>
         <!--this is based in the app.xaml file. Change definition there to override fluent UI Theme-->
         <Style TargetType="TextBox" BasedOn="{StaticResource BorderTextBox}"/>
+        
     </Window.Resources>
 
     <Grid>
@@ -29,14 +30,14 @@
 
         
         <Label Grid.Row="0" Content="Item Name :" Margin="0,0,8,0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-        <TextBox Name="itemNameTB" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Height="20" Width="200"/>
+        <TextBox Name="itemNameTB" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Height="20" Width="200" Text="{Binding ItemName}" />
         
         <Label Grid.Row="1" Content="Item Number :" Margin="0,0,8,0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-        <TextBox  Name="itemNumberTB" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Height="20" Width="200"/>
+        <TextBox  Name="itemNumberTB" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Height="20" Width="200" Text="{Binding ItemNumber}" />
         
         
         <Label Grid.Row="2" Content="Item Purchase Order Number :" Margin="0,0,8,0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-        <TextBox  Name="itemPurchaseOrderTB" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Height="20" Width="200"/>
+        <TextBox  Name="itemPurchaseOrderTB" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Height="20" Width="200" Text="{Binding ItemPurchaseOrderNumber}"/>
 
 
         <Button Content="Add Item" Grid.ColumnSpan="2" Grid.Row="3"  HorizontalAlignment="Center" Width="auto" Margin="10" BorderBrush="Gray" Click="addItemBtn_Click"/>
