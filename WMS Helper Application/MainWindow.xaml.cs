@@ -1,4 +1,6 @@
 ﻿using System.Collections.ObjectModel;
+using System.Diagnostics.SymbolStore;
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -63,6 +65,27 @@ namespace WMS_Helper_Application
                 var app = (App)Application.Current;
                 app.SelectedBarcodeModels.Remove(item);
                 app.AvailableBarcodeModels.Add(item);
+            }
+        }
+
+        private void printBtn_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Controls.PrintDialog print = new();
+
+            if (print.ShowDialog() == true)
+            {
+                DocumentPaginator docPaginator;
+                
+
+                
+
+                
+
+
+                //print.PrintDocument()
+
+
+
             }
         }
     }
