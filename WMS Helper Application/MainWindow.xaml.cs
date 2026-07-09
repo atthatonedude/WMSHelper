@@ -1,41 +1,17 @@
-﻿using System.Collections.ObjectModel;
-using System.Diagnostics.SymbolStore;
-using System.IO;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using WMS_Helper_Application.Model;
 
 namespace WMS_Helper_Application
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
-
-        //instantiates barmmodels collection
     {
-        
         public MainWindow()
         {
-            
             InitializeComponent();
             DataContext = Application.Current;
         }
-
-        
-
-
-
-
-        
 
         private void AddItemBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -45,7 +21,6 @@ namespace WMS_Helper_Application
             itemWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
 
             bool? returnedValue = itemWindow.ShowDialog();
-
         }
 
         private void AvailableBarcodeLB_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -70,22 +45,23 @@ namespace WMS_Helper_Application
 
         private void printBtn_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Controls.PrintDialog print = new();
+            var app = (App)Application.Current;
 
+            if (app.SelectedBarcodeModels.Count == 0)
+            {
+                MessageBox.Show("No items selected for printing.", "Print", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            var print = new System.Windows.Controls.PrintDialog();
             if (print.ShowDialog() == true)
             {
-                DocumentPaginator docPaginator;
-                
+                var doc = FlowDocumentBuild.BuildReport(app.SelectedBarcodeModels);
+                doc.PageWidth  = print.PrintableAreaWidth;
+                doc.PageHeight = print.PrintableAreaHeight;
 
-                
-
-                
-
-
-                //print.PrintDocument()
-
-
-
+                var paginator = ((IDocumentPaginatorSource)doc).DocumentPaginator;
+                print.PrintDocument(paginator, "Barcode Report");
             }
         }
     }

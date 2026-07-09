@@ -17,7 +17,7 @@ namespace WMS_Helper_Application.Model
             ItemName = name;
             ItemNumber = itemNumber;
             ItemPurchaseOrderNumber = itemPurchaseOrder;
-            this.itemNumberToBarcode = itemNumber.ToString();
+            ItemNumberToBarcode = itemNumber.ToString();
         }
 
         public string ItemName {  get; set; }
