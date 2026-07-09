@@ -56,11 +56,9 @@ namespace WMS_Helper_Application
             var print = new System.Windows.Controls.PrintDialog();
             if (print.ShowDialog() == true)
             {
-                var doc = FlowDocumentBuild.BuildReport(app.SelectedBarcodeModels);
-                doc.PageWidth  = print.PrintableAreaWidth;
-                doc.PageHeight = print.PrintableAreaHeight;
+                var pageSize  = new Size(print.PrintableAreaWidth, print.PrintableAreaHeight);
+                var paginator = new BarcodeDocumentPaginator(app.SelectedBarcodeModels, pageSize);
 
-                var paginator = ((IDocumentPaginatorSource)doc).DocumentPaginator;
                 print.PrintDocument(paginator, "Barcode Report");
             }
         }
