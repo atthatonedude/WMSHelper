@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              Background="White"
              FontFamily="Segoe UI"
-             FontSize="12">
-    <StackPanel Grid.IsSharedSizeScope="True" Margin="48">
+             FontSize="20">
+    <StackPanel  Grid.IsSharedSizeScope="True" Margin="48">
 
         <TextBlock Text="Barcode Report"
                    FontSize="20"
@@ -13,7 +13,7 @@
                    Margin="0,0,0,24"/>
 
         <!-- Header row -->
-        <Border BorderBrush="Black" BorderThickness="1" Background="LightGray">
+        <Border HorizontalAlignment="Center" BorderBrush="Black" BorderThickness="1" Background="LightGray">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition SharedSizeGroup="Name"/>
@@ -29,7 +29,7 @@
         </Border>
 
         <!-- Data rows -->
-        <ItemsControl ItemsSource="{Binding Items, RelativeSource={RelativeSource AncestorType=UserControl}}">
+        <ItemsControl HorizontalAlignment="Center" ItemsSource="{Binding Items, RelativeSource={RelativeSource AncestorType=UserControl}}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="Gray" BorderThickness="0,0,1,1">
@@ -43,7 +43,7 @@
                             <TextBlock Grid.Column="0" Text="{Binding ItemName}"                Padding="6,4"/>
                             <TextBlock Grid.Column="1" Text="{Binding ItemNumber}"              Padding="6,4"/>
                             <TextBlock Grid.Column="2" Text="{Binding ItemPurchaseOrderNumber}" Padding="6,4"/>
-                            <TextBlock Grid.Column="3" Text="{Binding ItemNumberToBarcode}"     Padding="6,4"/>
+                            <TextBlock Grid.Column="3" FontFamily="CarolinaBar-B39-2.5-50x158x720" Text="{Binding ItemNumberToBarcode}"     Padding="6,4"/>
                         </Grid>
                     </Border>
                 </DataTemplate>

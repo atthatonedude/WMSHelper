@@ -21,11 +21,23 @@
             <Style x:Key="BorderTextBox" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
                 <Setter Property="BorderThickness" Value="2" />
                 <Setter Property="BorderBrush" Value="Gray"/>
-
+                
 
             </Style>
+            
+            
+            <Style x:Key="bttnmouseover" TargetType="Button" BasedOn="{StaticResource{x:Type Button}}
+
+
+
+            
+            
+            
+            
 
         </ResourceDictionary>
 
     </Application.Resources>
 </Application>
+
+                

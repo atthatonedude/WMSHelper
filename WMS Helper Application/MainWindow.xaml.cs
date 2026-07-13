@@ -62,5 +62,10 @@ namespace WMS_Helper_Application
                 print.PrintDocument(paginator, "Barcode Report");
             }
         }
+
+        private void printBtn_MouseEnter(object sender, MouseEventArgs e)
+        {
+
+        }
     }
 }
