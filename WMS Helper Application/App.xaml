@@ -24,16 +24,24 @@
                 
 
             </Style>
-            
-            
-            <Style x:Key="bttnmouseover" TargetType="Button" BasedOn="{StaticResource{x:Type Button}}
 
 
 
-            
-            
-            
-            
+
+
+
+
+
+            <Style TargetType="Button">
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#0078D4"/>
+                        <Setter Property="Foreground" Value="White"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+
 
         </ResourceDictionary>
 
