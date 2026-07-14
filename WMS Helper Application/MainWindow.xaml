@@ -10,6 +10,7 @@
     <Window.Resources>
         <!--this is based in the app.xaml file. Change definition  to override fluent UI Theme-->
         <Style TargetType="ListBox" BasedOn="{StaticResource BorderedListBox}"/>
+        <Style TargetType="Button" BasedOn="{StaticResource ButtonStyling}"/>
     </Window.Resources>
     
     <Grid>
@@ -37,16 +38,26 @@
                 <MenuItem Command="ApplicationCommands.Print"></MenuItem>
             </MenuItem>
         </Menu>
+        
         <!--availabel items label and listbox-->
         <Label Content="Item Name"  Name="itemsLabel" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Grid.Column="0"  />
+
+        <Border Grid.Row="1" Grid.Column="0"  Margin="20">
+
+            <ListBox Name="AvailableBarcodeLB"  Grid.Row="1" Grid.Column="0" Height="auto" Width="auto" ItemsSource="{Binding AvailableBarcodeModels }" DisplayMemberPath="ItemName"  MouseDoubleClick="AvailableBarcodeLB_MouseDoubleClick"  />
+            
+        </Border>
         
-        <ListBox Name="AvailableBarcodeLB"  Grid.Row="1" Grid.Column="0" Height="350" Width="200" ItemsSource="{Binding AvailableBarcodeModels }" DisplayMemberPath="ItemName"  MouseDoubleClick="AvailableBarcodeLB_MouseDoubleClick" ScrollViewer.HorizontalScrollBarVisibility="Visible"/>
 
         <!--Selected label and listbox-->
 
         <Label  Name="itemsMovedLabel" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" Content="Items to Print"  />
-        
-        <ListBox Name="SelectedBarcodeLB"  Grid.Row="1" Grid.Column="1" Height="350" Width="200" ItemsSource="{Binding SelectedBarcodeModels}" DisplayMemberPath="ItemName" MouseDoubleClick="SelectedBarcodeLB_MouseDoubleClick"/>
+
+        <Border Grid.Row="1" Grid.Column="1" Margin="20">
+            
+            <ListBox Name="SelectedBarcodeLB"   Height="auto" Width="auto" ItemsSource="{Binding SelectedBarcodeModels}" DisplayMemberPath="ItemName" MouseDoubleClick="SelectedBarcodeLB_MouseDoubleClick" ScrollViewer.HorizontalScrollBarVisibility="Visible"/>
+            
+        </Border>
 
         
         <!--add item button-->
