@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(Get-ChildItem -Recurse -Force)",
-      "Bash(Select-Object -Property FullName, PSIsContainer)",
-      "Bash(Sort-Object FullName)"
-    ]
-  }
-}
