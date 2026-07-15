@@ -63,9 +63,14 @@ namespace WMS_Helper_Application
             }
         }
 
-        private void printBtn_MouseEnter(object sender, MouseEventArgs e)
-        {
+        
 
+       
+
+        private void placeholderTB_GotFocus(object sender, RoutedEventArgs e)
+        {
+            placeholderTB.Visibility = Visibility.Collapsed;
+            inputTB.Focus();
         }
     }
 }

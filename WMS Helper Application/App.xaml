@@ -4,12 +4,15 @@
              xmlns:local="clr-namespace:WMS_Helper_Application"
              StartupUri="MainWindow.xaml"
              Startup="Application_Startup">
+    
+    
     <Application.Resources>
         <ResourceDictionary>
             
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/PresentationFramework.Fluent;component/Themes/Fluent.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+
             
             
             <!--<Style x:Key="BorderedListBox" TargetType="ListBox" BasedOn="{StaticResource {x:Type ListBox}}">
@@ -20,7 +23,14 @@
 
             </Style>-->
 
-            <Style x:Key="BorderTextBox" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+
+            <FontFamily x:Key="AppFont">/MiscFiles/Fonts/Barlow/#Barlow</FontFamily>
+            <FontFamily x:Key="BarcodeFont">/MiscFiles/Fonts/#CarolinaBar-B39-2.5-50x158x720</FontFamily>
+
+            <Style x:Key="BorderTextBox" 
+                   TargetType="TextBox" 
+                   BasedOn="{StaticResource {x:Type TextBox}}">
+                
                 <Setter Property="BorderThickness" Value="2" />
                 <Setter Property="BorderBrush" Value="Gray"/>
                 
@@ -28,6 +38,7 @@
             </Style>
 
             <!--named button styling per window styling-->
+            
             <Style x:Key="ButtonStyling" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="True">
@@ -41,7 +52,7 @@
             <!--add styling to border list box-->
             <Style x:Key="BorderedListBox" TargetType="ListBox" BasedOn="{StaticResource {x:Type ListBox}}">
                 <Setter Property="BorderThickness" Value="2" />
-                <Setter Property="BorderBrush" Value="Blue"/>
+                <Setter Property="BorderBrush" Value="Gray"/>
                 <Setter Property="HorizontalContentAlignment" Value="Left"/>
                 
                 <Setter Property="Template">

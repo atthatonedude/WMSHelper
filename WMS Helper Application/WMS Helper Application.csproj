@@ -13,4 +13,8 @@
     <Folder Include="ViewModel\" />
   </ItemGroup>
 
+	<ItemGroup>
+		<Resource Include="MiscFiles\Fonts\**\*.ttf" />
+	</ItemGroup>
+
 </Project>
