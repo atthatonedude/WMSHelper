@@ -11,17 +11,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WMS_Helper_Application
+namespace WMS_Helper_Application.UserControls
 {
     /// <summary>
-    /// Interaction logic for TopBarUserControl.xaml
+    /// Interaction logic for WindowControl.xaml
     /// </summary>
-    public partial class TopBarUserControl : UserControl
+    public partial class WindowControl : UserControl
     {
-        public TopBarUserControl()
+        public WindowControl()
         {
             InitializeComponent();
-            DataContext = this;
         }
     }
 }

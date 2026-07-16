@@ -4,18 +4,19 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WMS_Helper_Application"
+        xmlns:controls="clr-namespace:WMS_Helper_Application.UserControls"
         mc:Ignorable="d"
         Title="Item Picker" Height="600" Width="800" FontFamily="{StaticResource AppFont}">
     <!--TODO: Create custom top bar-->
-    <!--<WindowChrome.WindowChrome >
+    <WindowChrome.WindowChrome >
         <WindowChrome GlassFrameThickness="0"/>
-    </WindowChrome.WindowChrome>-->
+    </WindowChrome.WindowChrome>
     
     <Window.Resources>
         
         <!--this is based in the app.xaml file. Change definition  to override fluent UI Theme-->
         <Style TargetType="ListBox" BasedOn="{StaticResource BorderedListBox}"/>
-        <Style TargetType="Button" BasedOn="{StaticResource ButtonStyling}"/>
+        <!--<Style TargetType="Button" BasedOn="{StaticResource ButtonStyling}"/>-->
     </Window.Resources>
     
     
@@ -33,11 +34,13 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="85"/>
         </Grid.RowDefinitions>
-
-        <Menu Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0">
-            
-        </Menu>
         
+
+        <!--custom max man close buttons-->
+        <controls:WindowControl Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Right"/>
+        
+        
+
         <!--availabel items label and listbox-->
         <Label Content="Item Name"  
                Name="itemsLabel" 
@@ -72,6 +75,8 @@
                                 
                  />
 
+        
+
 
         <Border Grid.Row="1" Grid.Column="0"  Margin="20,65,20,20">
 
@@ -89,11 +94,22 @@
 
         <!--Selected label and listbox-->
 
-        <Label  Name="itemsMovedLabel" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" Content="Items to Print"  />
+        <Label  Name="itemsMovedLabel" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Top" 
+                Grid.Row="1" 
+                Grid.Column="1" 
+                Content="Items to Print"  />
 
         <Border Grid.Row="1" Grid.Column="1" Margin="20">
             
-            <ListBox Name="SelectedBarcodeLB"   Height="auto" Width="auto" ItemsSource="{Binding SelectedBarcodeModels}" DisplayMemberPath="ItemName" MouseDoubleClick="SelectedBarcodeLB_MouseDoubleClick" ScrollViewer.HorizontalScrollBarVisibility="Visible"/>
+            <ListBox Name="SelectedBarcodeLB"   
+                     Height="auto" 
+                     Width="auto" 
+                     ItemsSource="{Binding SelectedBarcodeModels}" 
+                     DisplayMemberPath="ItemName" 
+                     MouseDoubleClick="SelectedBarcodeLB_MouseDoubleClick" 
+                     ScrollViewer.HorizontalScrollBarVisibility="Visible"/>
             
         </Border>
 
