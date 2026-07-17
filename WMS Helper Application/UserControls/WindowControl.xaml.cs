@@ -22,5 +22,27 @@ namespace WMS_Helper_Application.UserControls
         {
             InitializeComponent();
         }
+
+        private void minimizeBtn_Click(object sender, RoutedEventArgs e)
+        {
+        
+            var window = Window.GetWindow(this);
+            if (window != null) window.WindowState = WindowState.Minimized;
+        }
+
+        private void maximizeBTn_Click(object sender, RoutedEventArgs e)
+        {
+            var window = Window.GetWindow(this);
+            if (window == null) return;
+            window.WindowState = window.WindowState == WindowState.Maximized
+                ? WindowState.Normal
+                : WindowState.Maximized;
+        }
+
+        private void closeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Window.GetWindow(this)?.Close();
+        }
     }
+    
 }

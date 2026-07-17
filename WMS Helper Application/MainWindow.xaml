@@ -37,7 +37,7 @@
         
 
         <!--custom max man close buttons-->
-        <controls:WindowControl Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Right"/>
+        <controls:WindowControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  Background="#1d2d3d" />
         
         
 
