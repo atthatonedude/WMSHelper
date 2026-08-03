@@ -1,0 +1,73 @@
+<UserControl x:Class="WMS_Helper_Application.UserControls.WindowControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:WMS_Helper_Application.UserControls"
+             mc:Ignorable="d"
+             Height="25">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>     <!-- left: title + symbols, takes all leftover space -->
+            <ColumnDefinition Width="Auto"/>  <!-- right: buttons, only as wide as needed -->
+        </Grid.ColumnDefinitions>
+
+        <!-- LEFT: symbols + title -->
+        <StackPanel Grid.Column="0"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Margin="8,0,0,0">
+            <Viewbox Height="10" Margin="0,0,8,0">
+                <Path Stroke="White"
+                      Fill="AliceBlue"
+                      StrokeThickness="1"
+                      Data="M 1,1 H 11 V 11 H 1 Z"/>
+            </Viewbox>
+            <TextBlock Text="Item Picker" Foreground="#F2F2F3" VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <!-- RIGHT: min / max / close -->
+        <StackPanel Grid.Column="1"
+                    Orientation="Horizontal"
+                    WindowChrome.IsHitTestVisibleInChrome="True">
+
+            <Button Name="minimizeBtn"
+                    Background="#1d2d3d"
+                    Foreground="#F2F2F3"
+                    BorderBrush="Black"
+                    BorderThickness=".5"
+                    Content="_"
+                    Width="46"
+                    Height="25"
+                    Click="minimizeBtn_Click"/>
+
+            <Button Name="maximizeBTn"
+                    Background="#1d2d3d"
+                    Foreground="#F2F2F3"
+                    BorderBrush="Black"
+                    BorderThickness=".5"
+                    Width="46"
+                    Height="25"
+                    Click="maximizeBTn_Click">
+                <Viewbox Height="10">
+                    <Path Stroke="#F2F2F3"
+                          StrokeThickness="1"
+                          Fill="Transparent"
+                          Data="M 1,1 H 11 V 11 H 1 Z"/>
+                </Viewbox>
+            </Button>
+
+            <Button Name="closeBtn"
+                    Background="#1d2d3d"
+                    Foreground="#F2F2F3"
+                    BorderBrush="Black"
+                    BorderThickness=".5"
+                    Content="X"
+                    Width="46"
+                    Height="25"
+                    Click="closeBtn_Click"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

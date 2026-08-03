@@ -4,32 +4,129 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WMS_Helper_Application"
+        xmlns:controls="clr-namespace:WMS_Helper_Application.UserControls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800">
-    <Grid>
-        <Menu>
-            <MenuItem Header="File">
-                
-            </MenuItem>
-            <MenuItem Header="Print">
-                <MenuItem Command="ApplicationCommands.Print"></MenuItem>
-            </MenuItem>
-        </Menu>
+        Title="Item Picker" Height="600" Width="800" FontFamily="{StaticResource AppFont}">
+    <!--TODO: Create custom top bar-->
+    <WindowChrome.WindowChrome >
+        <WindowChrome GlassFrameThickness="0"/>
+    </WindowChrome.WindowChrome>
+    
+    <Window.Resources>
         
-        <StackPanel CanVerticallyScroll="False">
-            <Menu>
-                <MenuItem Header="File">
-                // TODO CREATE FILE OPTIONS
-                </MenuItem>
-                
-                <MenuItem Header="Print">
-                    //TODO: CREATE COMMAND LOGIC TO PRINT PAGE
-                    <MenuItem Command="ApplicationCommands.Print"></MenuItem>                    
-                </MenuItem>
-            </Menu>
+        <!--this is based in the app.xaml file. Change definition  to override fluent UI Theme-->
+        <Style TargetType="ListBox" BasedOn="{StaticResource BorderedListBox}"/>
+        <!--<Style TargetType="Button" BasedOn="{StaticResource ButtonStyling}"/>-->
+    </Window.Resources>
+    
+    
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+
+
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="85"/>
+        </Grid.RowDefinitions>
+        
+
+        <!--custom max man close buttons-->
+        <controls:WindowControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  Background="#1d2d3d" />
+        
+        
+
+        <!--availabel items label and listbox-->
+        <Label Content="Item Name"  
+               Name="itemsLabel" 
+               HorizontalAlignment="Center" 
+               VerticalAlignment="Top" 
+               Grid.Row="1" 
+               Grid.Column="0"/>
+        <!--actual input text box-->
+        <TextBox Name="inputTB"
+                 Visibility="Visible"
+                 Grid.Row="1" 
+                 Grid.Column="0" 
+                 Width="auto" 
+                 MinHeight="35" 
+                 Background="#e9e9ea" 
+                 VerticalAlignment="Top" 
+                 Margin="20"
+                 BorderBrush="#1d1f20" 
+                     />
+        <!--text placeholder text box-->
+        <TextBox Name="placeholderTB"
+                 Grid.Row="1" Visibility="Visible" Text="Filter Items..."
+                 Grid.Column="0" 
+                 Width="auto" 
+                 MinHeight="35" 
+                 Background="#e9e9ea" 
+                 VerticalAlignment="Top" 
+                 Margin="20"
+                 BorderBrush="#1d1f20" 
+                 IsReadOnly="True"
+                 GotFocus="placeholderTB_GotFocus"              
+                                
+                 />
+
+        
+
+
+        <Border Grid.Row="1" Grid.Column="0"  Margin="20,65,20,20">
+
+            <ListBox Name="AvailableBarcodeLB"  
+                     Grid.Row="1" 
+                     Grid.Column="0" 
+                     Height="auto" 
+                     Width="auto" 
+                     ItemsSource="{Binding AvailableBarcodeModels }" 
+                     DisplayMemberPath="ItemName"  
+                     MouseDoubleClick="AvailableBarcodeLB_MouseDoubleClick"  />
             
-            <TextBox>Name:</TextBox>
+        </Border>
+        
+
+        <!--Selected label and listbox-->
+
+        <Label  Name="itemsMovedLabel" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Top" 
+                Grid.Row="1" 
+                Grid.Column="1" 
+                Content="Items to Print"  />
+
+        <Border Grid.Row="1" Grid.Column="1" Margin="20">
             
-        </StackPanel>
+            <ListBox Name="SelectedBarcodeLB"   
+                     Height="auto" 
+                     Width="auto" 
+                     ItemsSource="{Binding SelectedBarcodeModels}" 
+                     DisplayMemberPath="ItemName" 
+                     MouseDoubleClick="SelectedBarcodeLB_MouseDoubleClick" 
+                     ScrollViewer.HorizontalScrollBarVisibility="Visible"/>
+            
+        </Border>
+
+        
+        <!--add item button-->
+        <Button Name="addItemBtn" Content="Add Item"  Grid.Row="2" Grid.Column="0" Height="50" Width="150" Click="AddItemBtn_Click" HorizontalAlignment="Center" BorderBrush="Gray" BorderThickness="2"/>
+        
+        <!--TODO: need logic for print btn event--> 
+        
+        
+        <Button  Name="printBtn" Content="Print" Grid.Row="2" Grid.Column="1" Height="50" Width="150" HorizontalAlignment="Center" BorderBrush="Gray" BorderThickness="2" Click="printBtn_Click"/>
+
+
+
+
+
+
+
     </Grid>
 </Window>
