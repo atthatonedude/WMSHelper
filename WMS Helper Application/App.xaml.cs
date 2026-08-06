@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using Microsoft.Data.Sqlite;
+using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Data;
 using System.Windows;
@@ -62,6 +63,11 @@ namespace WMS_Helper_Application
                 AvailableBarcodeModels.Add(item);
             }
 
+            using var connection = new SqliteConnection();
+            connection.Open();
+
+            connection.create
+            
         }
     }
 

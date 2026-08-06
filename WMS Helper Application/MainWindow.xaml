@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:WMS_Helper_Application"
         xmlns:controls="clr-namespace:WMS_Helper_Application.UserControls"
         mc:Ignorable="d"
-        Title="Item Picker" Height="600" Width="800" FontFamily="{StaticResource AppFont}">
+        Title="Item Picker" Height="600" Width="800" FontFamily="{StaticResource AppFont}"
+        MinHeight="600" MinWidth="800">
     <!--TODO: Create custom top bar-->
     <WindowChrome.WindowChrome >
         <WindowChrome GlassFrameThickness="0"/>
