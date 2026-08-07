@@ -11,7 +11,7 @@ namespace WMS_Helper_Application.Model
         //instance with validation
         private string itemNumberToBarcode;
         
-
+        public BarcodeModel() { }
         public BarcodeModel(string name, int itemNumber, int itemPurchaseOrder) 
         {
             ItemName = name;
@@ -23,6 +23,8 @@ namespace WMS_Helper_Application.Model
         public string ItemName {  get; set; }
 
         public int ItemNumber { get;set;  }
+
+        public int Id { get; set; }
 
 
         public int ItemPurchaseOrderNumber { get; set; }

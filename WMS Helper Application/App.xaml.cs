@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Data;
+using System.IO;
 using System.Windows;
 using WMS_Helper_Application.Model;
 
@@ -20,7 +21,11 @@ namespace WMS_Helper_Application
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             Seed();
-            
+            SqlLiteConnector Init = new SqlLiteConnector();
+
+            Init.Initialize();
+
+            //Directory.CreateDirectory(Path.GetDirectoryName(@"C:\Users\acubill\source\repos\WMSHelper\WMSHelperApplication\WMSHelperApplication.csproj\sqllite.db)")!);
         }
 
         private void Seed()
@@ -63,10 +68,7 @@ namespace WMS_Helper_Application
                 AvailableBarcodeModels.Add(item);
             }
 
-            using var connection = new SqliteConnection();
-            connection.Open();
-
-            connection.create
+           
             
         }
     }

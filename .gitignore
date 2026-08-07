@@ -364,3 +364,11 @@ FodyWeavers.xsd
 
 # Claude Code local settings
 .claude/settings.local.json
+
+# Personal working notes
+sqlite-notes.md
+
+# Local SQLite database (created at runtime)
+*.db
+*.db-shm
+*.db-wal
