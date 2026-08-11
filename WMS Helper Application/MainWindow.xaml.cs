@@ -1,3 +1,4 @@
+using Microsoft.Data.Sqlite;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -21,6 +22,61 @@ namespace WMS_Helper_Application
             itemWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
 
             bool? returnedValue = itemWindow.ShowDialog();
+        }
+
+        private void editItemBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (AvailableBarcodeLB.SelectedItem is not BarcodeModel item)
+            {
+                MessageBox.Show("Pick an item in the left hand list to edit.", "Edit Item",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            // The window saves and copies the changes back onto `item` itself.
+            var editWindow = new AddItemWindow(item)
+            {
+                Owner = this,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner
+            };
+
+            editWindow.ShowDialog();
+        }
+
+        private void deleteItemBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (AvailableBarcodeLB.SelectedItem is not BarcodeModel item)
+            {
+                MessageBox.Show("Pick an item in the left hand list to delete.", "Delete Item",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            var confirm = MessageBox.Show(
+                $"Delete \"{item.ItemName}\" permanently?", "Delete Item",
+                MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+            if (confirm != MessageBoxResult.Yes)
+            {
+                return;
+            }
+
+            var app = (App)Application.Current;
+
+            try
+            {
+                // A false return means the row was already gone. Nothing to undo,
+                // so fall through and drop it from the list either way.
+                app.Connector.Delete(item);
+            }
+            catch (SqliteException ex)
+            {
+                MessageBox.Show($"Could not delete the item.\n\n{ex.Message}", "Delete Item",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            app.AvailableBarcodeModels.Remove(item);
         }
 
         private void AvailableBarcodeLB_MouseDoubleClick(object sender, MouseButtonEventArgs e)

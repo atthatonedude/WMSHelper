@@ -21,12 +21,25 @@ namespace WMS_Helper_Application
         {
             Connector.Initialize();
 
-            Seed();
+            var stored = Connector.GetAll();
+
+            // First run only. Without the guard the sample rows get re-inserted
+            // on every launch and the list grows forever.
+            if (stored.Count == 0)
+            {
+                Connector.InsertMany(BuildSeedData());
+                stored = Connector.GetAll();   // re-read so every model carries its Id
+            }
+
+            foreach (var item in stored)
+            {
+                AvailableBarcodeModels.Add(item);
+            }
         }
 
-        private void Seed()
+        private BarcodeModel[] BuildSeedData()
         {
-            var seed = new[]
+            return new[]
             {
                 new BarcodeModel("teststring",11997, 2002021),
                 new BarcodeModel("test2",11252, 2002210),
@@ -58,15 +71,10 @@ namespace WMS_Helper_Application
                 new BarcodeModel("test2",11252, 2002210),
                 new BarcodeModel("test2",11252, 2002210),
             };
-
-            foreach (var item in seed)
-            {
-                AvailableBarcodeModels.Add(item);
-            }
-
-           
-            
         }
+
+
+        
     }
 
 }

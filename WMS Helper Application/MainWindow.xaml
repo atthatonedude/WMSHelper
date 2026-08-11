@@ -18,6 +18,22 @@
         <!--this is based in the app.xaml file. Change definition  to override fluent UI Theme-->
         <Style TargetType="ListBox" BasedOn="{StaticResource BorderedListBox}"/>
         <!--<Style TargetType="Button" BasedOn="{StaticResource ButtonStyling}"/>-->
+
+        <!--Greys out Edit/Delete until a row is picked in the left list. The
+            trigger only ever disables, so if the binding fails to resolve the
+            buttons stay usable rather than being stuck dead.-->
+        <Style x:Key="NeedsSelection" TargetType="Button">
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="110"/>
+            <Setter Property="Margin" Value="5,0"/>
+            <Setter Property="BorderBrush" Value="Gray"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=AvailableBarcodeLB, Path=SelectedItem}" Value="{x:Null}">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
     
     
@@ -115,8 +131,16 @@
         </Border>
 
         
-        <!--add item button-->
-        <Button Name="addItemBtn" Content="Add Item"  Grid.Row="2" Grid.Column="0" Height="50" Width="150" Click="AddItemBtn_Click" HorizontalAlignment="Center" BorderBrush="Gray" BorderThickness="2"/>
+        <!--add / edit / delete act on the left hand list only-->
+        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+            <Button Name="addItemBtn" Content="Add Item" Height="50" Width="110" Margin="5,0" Click="AddItemBtn_Click" BorderBrush="Gray" BorderThickness="2"/>
+
+            <Button Name="editItemBtn" Content="Edit Item" Style="{StaticResource NeedsSelection}" Click="editItemBtn_Click"/>
+
+            <Button Name="deleteItemBtn" Content="Delete Item" Style="{StaticResource NeedsSelection}" Click="deleteItemBtn_Click"/>
+
+        </StackPanel>
         
         <!--TODO: need logic for print btn event--> 
         

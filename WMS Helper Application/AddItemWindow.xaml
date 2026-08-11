@@ -40,7 +40,9 @@
         <TextBox  Name="itemPurchaseOrderTB" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Height="20" Width="200" Text="{Binding ItemPurchaseOrderNumber}"/>
 
 
-        <Button Content="Add Item" Grid.ColumnSpan="2" Grid.Row="3"  HorizontalAlignment="Center" Width="auto" Margin="10" BorderBrush="Gray" Click="addItemBtn_Click"/>
+        <!--Content and window title are swapped in the code-behind when this
+            window is opened in edit mode.-->
+        <Button Name="addItemBtn" Content="Add Item" Grid.ColumnSpan="2" Grid.Row="3"  HorizontalAlignment="Center" Width="auto" Margin="10" BorderBrush="Gray" Click="addItemBtn_Click"/>
 
 
     </Grid>
