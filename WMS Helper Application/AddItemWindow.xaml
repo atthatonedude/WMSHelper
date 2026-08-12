@@ -160,21 +160,21 @@
                     <TextBlock Text="Item Name" Style="{StaticResource FieldLabel}"/>
                     <TextBox Name="itemNameTB"
                              Tag="e.g. Widget A"
-                             Text="{Binding ItemName}"/>
+                             Text="{Binding ItemName, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
 
                 <StackPanel Margin="0,0,0,16">
                     <TextBlock Text="Item Number" Style="{StaticResource FieldLabel}"/>
                     <TextBox Name="itemNumberTB"
                              Tag="0"
-                             Text="{Binding ItemNumber}"/>
+                             Text="{Binding ItemNumber, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
 
                 <StackPanel Margin="0,0,0,16">
                     <TextBlock Text="Purchase Order Number" Style="{StaticResource FieldLabel}"/>
                     <TextBox Name="itemPurchaseOrderTB"
                              Tag="0"
-                             Text="{Binding ItemPurchaseOrderNumber}"/>
+                             Text="{Binding ItemPurchaseOrderNumber, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
 
             </StackPanel>
