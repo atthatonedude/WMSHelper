@@ -54,7 +54,7 @@
         
 
         <!--custom max man close buttons-->
-        <controls:WindowControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  Background="#1d2d3d" />
+        <controls:WindowControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  Background="#1d2d3d" Title="Item Picker" />
         
         
 
@@ -75,7 +75,8 @@
                  Background="#e9e9ea" 
                  VerticalAlignment="Top" 
                  Margin="20"
-                 BorderBrush="#1d1f20" 
+                 BorderBrush="#1d1f20"                 
+                 TextChanged="inputTB_TextChanged"
                      />
         <!--text placeholder text box-->
         <TextBox Name="placeholderTB"

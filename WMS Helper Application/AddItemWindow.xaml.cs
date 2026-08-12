@@ -53,7 +53,10 @@ namespace WMS_Helper_Application
 
             DataContext = barcodeModel;
 
+            // Window.Title still drives the taskbar entry, but the custom chrome
+            // hides the OS caption, so the bar needs telling separately.
             Title = "Edit Item";
+            titleBar.Title = "Edit Item";
             addItemBtn.Content = "Save Changes";
         }
 
@@ -116,11 +119,6 @@ namespace WMS_Helper_Application
             }
 
             DialogResult = true;
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

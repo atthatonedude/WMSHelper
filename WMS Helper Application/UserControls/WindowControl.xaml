@@ -7,6 +7,10 @@
              mc:Ignorable="d"
              Height="25">
 
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
+    </UserControl.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>     <!-- left: title + symbols, takes all leftover space -->
@@ -23,9 +27,11 @@
                 <Path Stroke="White"
                       Fill="AliceBlue"
                       StrokeThickness="1"
-                      Data="M 1,1 H 11 V 11 H 1 Z"/>
+                      Data="{Binding IconData, RelativeSource={RelativeSource AncestorType={x:Type local:WindowControl}}}"/>
             </Viewbox>
-            <TextBlock Text="Item Picker" Foreground="#F2F2F3" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding Title, RelativeSource={RelativeSource AncestorType={x:Type local:WindowControl}}}"
+                       Foreground="#F2F2F3"
+                       VerticalAlignment="Center"/>
         </StackPanel>
 
         <!-- RIGHT: min / max / close -->
@@ -41,6 +47,7 @@
                     Content="_"
                     Width="46"
                     Height="25"
+                    Visibility="{Binding ShowMinMaxButtons, RelativeSource={RelativeSource AncestorType={x:Type local:WindowControl}}, Converter={StaticResource BoolToVisibility}}"
                     Click="minimizeBtn_Click"/>
 
             <Button Name="maximizeBTn"
@@ -50,6 +57,7 @@
                     BorderThickness=".5"
                     Width="46"
                     Height="25"
+                    Visibility="{Binding ShowMinMaxButtons, RelativeSource={RelativeSource AncestorType={x:Type local:WindowControl}}, Converter={StaticResource BoolToVisibility}}"
                     Click="maximizeBTn_Click">
                 <Viewbox Height="10">
                     <Path Stroke="#F2F2F3"

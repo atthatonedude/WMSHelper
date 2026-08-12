@@ -1,5 +1,7 @@
 using Microsoft.Data.Sqlite;
+using System.ComponentModel;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using WMS_Helper_Application.Model;
@@ -8,12 +10,35 @@ namespace WMS_Helper_Application
 {
     public partial class MainWindow : Window
     {
+        //availabel barcodes Icollection view just views the collection and does not changes actual ObservableCollection
+        private readonly ICollectionView availableBarcodesCollection;
+
         public MainWindow()
         {
             InitializeComponent();
+            var currentApplicationInstance = (App)Application.Current;
+
+            ICollectionView collection = CollectionViewSource.GetDefaultView(currentApplicationInstance.AvailableBarcodeModels);
+
+            availableBarcodesCollection = collection;
+            collection.Filter = FilterByString;
+
             DataContext = Application.Current;
         }
 
+        private bool FilterByString(object obj)
+        {
+            var text = inputTB.Text;
+
+            // Empty box shows everything rather than nothing.
+            if (string.IsNullOrWhiteSpace(text))
+            {
+                return true;
+            }
+
+            return obj is BarcodeModel model
+                && model.ItemName.Contains(text, StringComparison.OrdinalIgnoreCase);
+        }
         private void AddItemBtn_Click(object sender, RoutedEventArgs e)
         {
             AddItemWindow itemWindow = new AddItemWindow();
@@ -127,6 +152,13 @@ namespace WMS_Helper_Application
         {
             placeholderTB.Visibility = Visibility.Collapsed;
             inputTB.Focus();
+        }
+
+       
+
+        private void inputTB_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            availableBarcodesCollection.Refresh();
         }
     }
 }

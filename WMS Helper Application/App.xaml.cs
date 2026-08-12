@@ -44,37 +44,12 @@ namespace WMS_Helper_Application
                 new BarcodeModel("teststring",11997, 2002021),
                 new BarcodeModel("test2",11252, 2002210),
                 new BarcodeModel("teststring",11997, 2002021),
-                new BarcodeModel("test2",11252, 2002210),
-                new BarcodeModel("test2",11252, 2002210),
-                new BarcodeModel("test2",11252, 2002210),
-                new BarcodeModel("test2",11252, 2002210),
-                new BarcodeModel("test2",11252, 2002210),
-                new BarcodeModel("test2",11252, 2002210),
-                new BarcodeModel("test2",11252, 2002210),
-                new BarcodeModel("test2",11252, 2002210),
-                new BarcodeModel("test2",11252, 2002210),
-                new BarcodeModel("test2",11252, 2002210),
-                new BarcodeModel("test2",11252, 2002210),
-                new BarcodeModel("test2",11252, 2002210),
-                new BarcodeModel("test2",11252, 2002210),
-                new BarcodeModel("test2",11252, 2002210),
-                new BarcodeModel("test2",11252, 2002210),
-                new BarcodeModel("test2",11252, 2002210),
-                new BarcodeModel("test2",11252, 2002210),
-                new BarcodeModel("test2",11252, 2002210),
-                new BarcodeModel("test2",11252, 2002210),
-                new BarcodeModel("test2",11252, 2002210),
-                new BarcodeModel("test2",11252, 2002210),
-                new BarcodeModel("test2",11252, 2002210),
-                new BarcodeModel("test2",11252, 2002210),
-                new BarcodeModel("test2",11252, 2002210),
-                new BarcodeModel("test2",11252, 2002210),
-                new BarcodeModel("test2",11252, 2002210),
+
             };
         }
 
 
-        
+
     }
 
 }
