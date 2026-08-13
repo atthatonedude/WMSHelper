@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using Microsoft.Data.Sqlite;
+using System.Collections.ObjectModel;
+using System.IO;
 using System.Windows;
 using WMS_Helper_Application.Model;
 
@@ -17,35 +19,44 @@ namespace WMS_Helper_Application
         // Reachable from any window via ((App)Application.Current).Connector
         public SqlLiteConnector Connector { get; } = new();
 
+        // A new install starts empty. Sample rows used to be inserted whenever the
+        // table had no rows, which meant emptying the list brought them back.
+        //
+        // The main window is opened here rather than through StartupUri so it only
+        // appears once the database is known to be readable - StartupUri would show
+        // it after this returns, leaving a live window over a dead connector.
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            Connector.Initialize();
-
-            var stored = Connector.GetAll();
-
-            // First run only. Without the guard the sample rows get re-inserted
-            // on every launch and the list grows forever.
-            if (stored.Count == 0)
+            try
             {
-                Connector.InsertMany(BuildSeedData());
-                stored = Connector.GetAll();   // re-read so every model carries its Id
+                Connector.Initialize();
+
+                foreach (var item in Connector.GetAll())
+                {
+                    AvailableBarcodeModels.Add(item);
+                }
+            }
+            catch (Exception ex) when (ex is SqliteException or IOException or UnauthorizedAccessException)
+            {
+                // This fires before any window exists. Left unhandled the process
+                // dies to WPF's default handler and the user sees nothing at all -
+                // clicking the icon simply appears to do nothing.
+                MessageBox.Show(
+                    "WMS Helper could not open its item database, so it has to close.\n\n" +
+                    $"Database file:\n{Connector.DatabasePath}\n\n" +
+                    $"Error:\n{ex.Message}\n\n" +
+                    "If the file is damaged, rename it and start the app again - a new " +
+                    "empty database will be created. Keep the old file if you want to " +
+                    "try recovering the items it held.",
+                    "WMS Helper",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+
+                Shutdown(1);
+                return;
             }
 
-            foreach (var item in stored)
-            {
-                AvailableBarcodeModels.Add(item);
-            }
-        }
-
-        private BarcodeModel[] BuildSeedData()
-        {
-            return new[]
-            {
-                new BarcodeModel("teststring",11997, 2002021),
-                new BarcodeModel("test2",11252, 2002210),
-                new BarcodeModel("teststring",11997, 2002021),
-
-            };
+            new MainWindow().Show();
         }
 
 

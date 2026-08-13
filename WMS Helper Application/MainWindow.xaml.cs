@@ -16,6 +16,7 @@ namespace WMS_Helper_Application
         public MainWindow()
         {
             InitializeComponent();
+            //creates applciatoin instance to used "global variables" like availablebarcodemodels
             var currentApplicationInstance = (App)Application.Current;
 
             ICollectionView collection = CollectionViewSource.GetDefaultView(currentApplicationInstance.AvailableBarcodeModels);
@@ -26,6 +27,8 @@ namespace WMS_Helper_Application
             DataContext = Application.Current;
         }
 
+
+        //filters text input in text box 
         private bool FilterByString(object obj)
         {
             var text = inputTB.Text;
@@ -39,6 +42,8 @@ namespace WMS_Helper_Application
             return obj is BarcodeModel model
                 && model.ItemName.Contains(text, StringComparison.OrdinalIgnoreCase);
         }
+
+        //Opens additemwindow 
         private void AddItemBtn_Click(object sender, RoutedEventArgs e)
         {
             AddItemWindow itemWindow = new AddItemWindow();
@@ -48,7 +53,7 @@ namespace WMS_Helper_Application
 
             bool? returnedValue = itemWindow.ShowDialog();
         }
-
+        //Edits currently selected item from available items.
         private void editItemBtn_Click(object sender, RoutedEventArgs e)
         {
             if (AvailableBarcodeLB.SelectedItem is not BarcodeModel item)
@@ -68,15 +73,16 @@ namespace WMS_Helper_Application
             editWindow.ShowDialog();
         }
 
+        //Deletes item from avaialblebarcodes. Can only remove from availablebarcodes.
         private void deleteItemBtn_Click(object sender, RoutedEventArgs e)
-        {
+        {   //throws message if not a barcode model
             if (AvailableBarcodeLB.SelectedItem is not BarcodeModel item)
             {
                 MessageBox.Show("Pick an item in the left hand list to delete.", "Delete Item",
                     MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
-
+            //when selected for deletion confirms before deltion.
             var confirm = MessageBox.Show(
                 $"Delete \"{item.ItemName}\" permanently?", "Delete Item",
                 MessageBoxButton.YesNo, MessageBoxImage.Warning);

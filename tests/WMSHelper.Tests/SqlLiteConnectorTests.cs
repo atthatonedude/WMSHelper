@@ -47,6 +47,27 @@ namespace WMSHelper.Tests
             Assert.Single(db.Connector.GetAll());
         }
 
+        /// <summary>
+        /// Regression: Initialize was once guarded on the database file existing.
+        /// SQLite creates the file the moment a connection opens, so a launch cut
+        /// short before the schema was written left a file with no table - and the
+        /// guard then skipped the create on every launch after, permanently.
+        /// </summary>
+        [Fact]
+        public void Initialize_creates_the_table_when_the_file_exists_without_it()
+        {
+            using var db = new TempDatabase(initialize: false);
+
+            Directory.CreateDirectory(db.Folder);
+            File.WriteAllBytes(db.Path, Array.Empty<byte>());
+            Assert.True(File.Exists(db.Path));
+
+            db.Connector.Initialize();
+
+            // Would throw "no such table: Barcodes" if the create had been skipped.
+            Assert.Empty(db.Connector.GetAll());
+        }
+
         // ---------- GetAll ----------
 
         [Fact]

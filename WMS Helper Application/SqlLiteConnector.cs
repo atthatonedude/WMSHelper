@@ -11,7 +11,7 @@ namespace WMS_Helper_Application
 {
     public class SqlLiteConnector
     {
-
+        #region Properties
         public static string SqlLiteLocation { get; } = GetDatabasePath();
 
         public static string ConnectionString { get; } = BuildConnectionString(SqlLiteLocation);
@@ -22,6 +22,10 @@ namespace WMS_Helper_Application
 
         private readonly string connectionString;
 
+        #endregion
+
+
+        #region Constructors
         public SqlLiteConnector() : this(SqlLiteLocation) { }
 
         public SqlLiteConnector(string databasePath)
@@ -30,13 +34,10 @@ namespace WMS_Helper_Application
             connectionString = BuildConnectionString(databasePath);
         }
 
-        public static string BuildConnectionString(string databasePath) =>
-            new SqliteConnectionStringBuilder
-            {
-                DataSource = databasePath,
-                Mode = SqliteOpenMode.ReadWriteCreate,
-                Cache = SqliteCacheMode.Shared
-            }.ToString();
+        #endregion
+
+
+        #region Methods
 
 
         private static string GetDatabasePath()
@@ -58,6 +59,14 @@ namespace WMS_Helper_Application
         private static string ProjectDirectory([CallerFilePath] string thisFile = "") =>
             Path.GetDirectoryName(thisFile)!;
 
+        public static string BuildConnectionString(string databasePath) =>
+            new SqliteConnectionStringBuilder
+            {
+                DataSource = databasePath,
+                Mode = SqliteOpenMode.ReadWriteCreate,
+                Cache = SqliteCacheMode.Shared
+            }.ToString();
+
 
         private void CreateSqliteDirectory()
         {
@@ -71,7 +80,7 @@ namespace WMS_Helper_Application
                 Directory.CreateDirectory(folder);
             }
         }
-
+        
 
         // The caller owns the returned connection - no `using` here, or it would
         // be disposed the moment this method returns.
@@ -84,6 +93,10 @@ namespace WMS_Helper_Application
             return connection;
         }
 
+        // No "has this run before?" guard: CREATE TABLE IF NOT EXISTS is already
+        // idempotent, and guarding it on the file existing would skip the create
+        // for a file that exists without the table - which is what you get if a
+        // launch is interrupted between SQLite making the file and this running.
         public void Initialize()
         {
             CreateSqliteDirectory();
@@ -175,6 +188,8 @@ namespace WMS_Helper_Application
             // Anonymous object rather than the model: DELETE only needs the key.
             return connection.Execute("DELETE FROM Barcodes WHERE Id = @id;", new { id }) == 1;
         }
+
+        #endregion
 
 
     }
