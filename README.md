@@ -13,7 +13,7 @@ The reusable parts of WMS Helper live in two class libraries, so other projects 
 
 ### Using them in a new WPF app
 
-1. Reference both projects.
+1. Reference both projects, or both packages once they're published (see [Packaging](#packaging)).
 2. Merge the shared styles in `App.xaml`. This also brings in the Fluent theme and the `AppFont` / `BarcodeFont` resources:
    ```xml
    <Application.Resources>
@@ -41,3 +41,7 @@ The reusable parts of WMS Helper live in two class libraries, so other projects 
    connector.Initialize();   // creates the folder, file and table if they're missing
    ```
 5. For printing, `BarcodePrinter.Print(items)` shows the print dialog and prints the barcode report. It returns `false` if the user cancels.
+
+### Packaging
+
+Both libraries are set up as NuGet packages, and each `.csproj` holds its `<Version>`. Running `dotnet pack -c Release` from the repository root builds `WMSHelper.Core.<version>.nupkg` and `WMSHelper.Wpf.<version>.nupkg`; the app and the tests aren't packed. `WMSHelper.Wpf` depends on `WMSHelper.Core`, so publish them together, for example to GitHub Packages or a shared folder that other projects add as a NuGet source. Raise the version in both projects for each new release.

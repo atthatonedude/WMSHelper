@@ -10,6 +10,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <!-- NuGet package details for `dotnet pack`. The package id defaults to
+       the assembly name, WMSHelper.Core. Bump Version for each release. -->
+  <PropertyGroup>
+    <Version>1.0.0</Version>
+    <Description>Barcode item model and SQLite storage (Dapper + Microsoft.Data.Sqlite) shared by WMS Helper apps.</Description>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.1.79" />
     <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.10" />

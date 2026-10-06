@@ -11,10 +11,29 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <!-- NuGet package details for `dotnet pack`. The package id defaults to
+       the assembly name, WMSHelper.Wpf. Keep Version in step with
+       WMSHelper.Core: the package depends on Core at this version or later. -->
+  <PropertyGroup>
+    <Version>1.0.0</Version>
+    <Description>WPF pieces shared by WMS Helper apps: custom title bar, barcode report printing, the Barlow and barcode fonts, and shared styles.</Description>
+  </PropertyGroup>
+
   <!-- Every font file under Fonts, whatever the case of its extension
        (CarolinaBar.TTF is upper case), minus the OFL.txt licences. -->
   <ItemGroup>
     <Resource Include="Fonts\**\*" Exclude="Fonts\**\*.txt" />
+  </ItemGroup>
+
+  <!-- The Barlow fonts are under the SIL Open Font License, which has to
+       travel with them, so the licences go into the package too. Update
+       rather than Include: the SDK already lists these files as None items.
+       A PackagePath ending in a slash keeps each file's folder, so they
+       land at licenses/Fonts/<family>/OFL.txt. Forward slash on purpose:
+       a trailing backslash isn't seen as a separator when packing on
+       Linux and doubles the slash. -->
+  <ItemGroup>
+    <None Update="Fonts\**\OFL.txt" Pack="true" PackagePath="licenses/" />
   </ItemGroup>
 
   <ItemGroup>
