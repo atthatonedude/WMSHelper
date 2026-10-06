@@ -2,7 +2,8 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
-using WMS_Helper_Application.Model;
+using WMSHelper.Core.Data;
+using WMSHelper.Core.Models;
 
 namespace WMS_Helper_Application
 {
@@ -17,7 +18,7 @@ namespace WMS_Helper_Application
         public ObservableCollection<BarcodeModel> SelectedBarcodeModels { get; } = new();
 
         // Reachable from any window via ((App)Application.Current).Connector
-        public SqlLiteConnector Connector { get; } = new();
+        public SqlLiteConnector Connector { get; } = new(AppPaths.DatabasePath);
 
         // A new install starts empty. Sample rows used to be inserted whenever the
         // table had no rows, which meant emptying the list brought them back.

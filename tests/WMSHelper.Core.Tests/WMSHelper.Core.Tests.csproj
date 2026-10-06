@@ -1,10 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <!-- Must match the app project: it is a WPF assembly, so the tests have to
-         target the Windows desktop framework to reference it. -->
-    <TargetFramework>net10.0-windows</TargetFramework>
-    <UseWPF>true</UseWPF>
+    <!-- Matches WMSHelper.Core, which has no WPF in it, so these tests run on
+         any OS (including Linux CI), not just Windows. -->
+    <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
@@ -18,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\WMS Helper Application\WMS Helper Application.csproj" />
+    <ProjectReference Include="..\..\WMSHelper.Core\WMSHelper.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>

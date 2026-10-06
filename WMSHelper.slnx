@@ -1,6 +1,7 @@
 <Solution>
   <Folder Name="/tests/">
-    <Project Path="tests/WMSHelper.Tests/WMSHelper.Tests.csproj" />
+    <Project Path="tests/WMSHelper.Core.Tests/WMSHelper.Core.Tests.csproj" />
   </Folder>
   <Project Path="WMS Helper Application/WMS Helper Application.csproj" />
+  <Project Path="WMSHelper.Core/WMSHelper.Core.csproj" />
 </Solution>

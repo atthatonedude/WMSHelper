@@ -1,9 +1,9 @@
 using System.IO;
 using System.Linq;
-using WMS_Helper_Application;
-using WMS_Helper_Application.Model;
+using WMSHelper.Core.Data;
+using WMSHelper.Core.Models;
 
-namespace WMSHelper.Tests
+namespace WMSHelper.Core.Tests
 {
     public class SqlLiteConnectorTests
     {
@@ -326,14 +326,6 @@ namespace WMSHelper.Tests
             using var db = new TempDatabase();
 
             Assert.Equal(db.Path, db.Connector.DatabasePath);
-        }
-
-        [Fact]
-        public void The_default_constructor_points_at_the_app_database()
-        {
-            // Guards the seam: the parameterless constructor must keep using the
-            // real location, or the app would quietly write somewhere else.
-            Assert.Equal(SqlLiteConnector.SqlLiteLocation, new SqlLiteConnector().DatabasePath);
         }
     }
 }

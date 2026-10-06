@@ -17,10 +17,10 @@
 		<Resource Include="MiscFiles\Fonts\**\*.ttf" />
 	</ItemGroup>
 
+	<!-- Model and SQLite data access. Dapper and Microsoft.Data.Sqlite
+	     (needed here for SqliteException) come through this reference. -->
 	<ItemGroup>
-	  <PackageReference Include="Dapper" Version="2.1.79" />
-	  <PackageReference Include="Dapper.Extensions.NetCore" Version="5.4.3" />
-	  <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.10" />
+	  <ProjectReference Include="..\WMSHelper.Core\WMSHelper.Core.csproj" />
 	</ItemGroup>
 
 </Project>

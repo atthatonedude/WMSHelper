@@ -1,7 +1,7 @@
 using System.ComponentModel;
-using WMS_Helper_Application.Model;
+using WMSHelper.Core.Models;
 
-namespace WMSHelper.Tests
+namespace WMSHelper.Core.Tests
 {
     public class BarcodeModelTests
     {

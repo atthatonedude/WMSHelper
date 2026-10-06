@@ -4,20 +4,17 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using WMS_Helper_Application.Model;
+using WMSHelper.Core.Models;
 
-namespace WMS_Helper_Application
+namespace WMSHelper.Core.Data
 {
     public class SqlLiteConnector
     {
         #region Properties
-        public static string SqlLiteLocation { get; } = GetDatabasePath();
 
-        public static string ConnectionString { get; } = BuildConnectionString(SqlLiteLocation);
-
-        // Which file this particular connector talks to. The app uses the
-        // default; tests hand in a scratch path so they never touch it.
+        // Which file this particular connector talks to. Each app decides where
+        // its database lives and passes the path in; tests hand in a scratch
+        // path so they never touch a real one.
         public string DatabasePath { get; }
 
         private readonly string connectionString;
@@ -26,7 +23,6 @@ namespace WMS_Helper_Application
 
 
         #region Constructors
-        public SqlLiteConnector() : this(SqlLiteLocation) { }
 
         public SqlLiteConnector(string databasePath)
         {
@@ -39,25 +35,6 @@ namespace WMS_Helper_Application
 
         #region Methods
 
-
-        private static string GetDatabasePath()
-        {
-#if DEBUG
-            // Keep the db next to the source in debug builds so it's easy to open
-            // in a db browser. ProjectDirectory() is baked in at compile time, so
-            // this is only meaningful on the machine that built it.
-            return Path.Combine(ProjectDirectory(), "wmshelper.db");
-#else
-            return Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                "WMSHelper", "wmshelper.db");
-#endif
-        }
-
-        // The compiler substitutes this source file's full path, so we get the
-        // project folder without hardcoding a username.
-        private static string ProjectDirectory([CallerFilePath] string thisFile = "") =>
-            Path.GetDirectoryName(thisFile)!;
 
         public static string BuildConnectionString(string databasePath) =>
             new SqliteConnectionStringBuilder

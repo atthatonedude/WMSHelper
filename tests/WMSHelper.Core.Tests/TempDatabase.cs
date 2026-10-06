@@ -1,8 +1,8 @@
 using System.IO;
 using Microsoft.Data.Sqlite;
-using WMS_Helper_Application;
+using WMSHelper.Core.Data;
 
-namespace WMSHelper.Tests
+namespace WMSHelper.Core.Tests
 {
     /// <summary>
     /// A throwaway SQLite file for one test. xunit builds a new instance of the

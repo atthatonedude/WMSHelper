@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace WMS_Helper_Application.Model
+namespace WMSHelper.Core.Models
 {
     public class BarcodeModel : INotifyPropertyChanged
     {

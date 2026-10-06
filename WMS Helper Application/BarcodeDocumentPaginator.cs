@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Documents;
-using WMS_Helper_Application.Model;
+using WMSHelper.Core.Models;
 
 namespace WMS_Helper_Application
 {

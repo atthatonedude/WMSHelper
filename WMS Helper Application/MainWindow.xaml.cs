@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-using WMS_Helper_Application.Model;
+using WMSHelper.Core.Models;
 
 namespace WMS_Helper_Application
 {

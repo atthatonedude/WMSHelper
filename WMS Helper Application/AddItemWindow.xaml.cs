@@ -10,7 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using WMS_Helper_Application.Model;
+using WMSHelper.Core.Models;
 
 namespace WMS_Helper_Application
 {
