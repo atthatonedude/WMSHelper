@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- The Windows-only half of the shared code: the custom title bar, barcode
+       report printing, the fonts they use and the shared styles. Anything
+       that doesn't need WPF belongs in WMSHelper.Core instead. -->
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>WMSHelper.Wpf</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <!-- Every font file under Fonts, whatever the case of its extension
+       (CarolinaBar.TTF is upper case), minus the OFL.txt licences. -->
+  <ItemGroup>
+    <Resource Include="Fonts\**\*" Exclude="Fonts\**\*.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WMSHelper.Core\WMSHelper.Core.csproj" />
+  </ItemGroup>
+
+</Project>

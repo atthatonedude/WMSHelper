@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WMS_Helper_Application"
-        xmlns:controls="clr-namespace:WMS_Helper_Application.UserControls"
+        xmlns:controls="clr-namespace:WMSHelper.Wpf.Controls;assembly=WMSHelper.Wpf"
         mc:Ignorable="d"
         Title="Add Item" Height="365" Width="480"
         ResizeMode="NoResize"
@@ -19,122 +19,10 @@
 
     <Window.Resources>
 
-        <!--Flat grey field. Templated rather than restyled because the Fluent
-            theme draws its own accent underline that fights the mockup.-->
-        <Style TargetType="TextBox">
-            <Setter Property="Height" Value="34"/>
-            <Setter Property="Padding" Value="10,0"/>
-            <Setter Property="Background" Value="#F2F2F3"/>
-            <Setter Property="Foreground" Value="#1D2D3D"/>
-            <Setter Property="BorderBrush" Value="#D6D6D8"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CaretBrush" Value="#1D2D3D"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="TextBox">
-                        <Border x:Name="Bd"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="3"
-                                SnapsToDevicePixels="True">
-                            <Grid>
-                                <!--Tag carries the placeholder, so each box sets
-                                    its own hint without needing a second control.-->
-                                <TextBlock x:Name="placeholder"
-                                           Text="{TemplateBinding Tag}"
-                                           Foreground="#9AA0A6"
-                                           Margin="{TemplateBinding Padding}"
-                                           VerticalAlignment="Center"
-                                           Visibility="Collapsed"
-                                           IsHitTestVisible="False"/>
-                                <ScrollViewer x:Name="PART_ContentHost"
-                                              Focusable="False"
-                                              Margin="{TemplateBinding Padding}"
-                                              VerticalAlignment="Center"
-                                              HorizontalScrollBarVisibility="Hidden"
-                                              VerticalScrollBarVisibility="Hidden"/>
-                            </Grid>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="Text" Value="">
-                                <Setter TargetName="placeholder" Property="Visibility" Value="Visible"/>
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Bd" Property="BorderBrush" Value="#B9BDC2"/>
-                            </Trigger>
-                            <Trigger Property="IsKeyboardFocused" Value="True">
-                                <Setter TargetName="Bd" Property="Background" Value="White"/>
-                                <Setter TargetName="Bd" Property="BorderBrush" Value="#4A8FC7"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style x:Key="FieldLabel" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="13"/>
-            <Setter Property="Foreground" Value="#3F4A55"/>
-            <Setter Property="Margin" Value="2,0,0,6"/>
-        </Style>
-
-        <!--Shared shell for both dialog buttons. Colour lives in the derived
-            styles so the hover triggers there can just set Background.-->
-        <Style x:Key="DialogButton" TargetType="Button">
-            <Setter Property="Height" Value="34"/>
-            <Setter Property="MinWidth" Value="88"/>
-            <Setter Property="Padding" Value="16,0"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="3"
-                                SnapsToDevicePixels="True">
-                            <ContentPresenter HorizontalAlignment="Center"
-                                              VerticalAlignment="Center"
-                                              Margin="{TemplateBinding Padding}"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style x:Key="SecondaryButton" TargetType="Button" BasedOn="{StaticResource DialogButton}">
-            <Setter Property="Background" Value="White"/>
-            <Setter Property="Foreground" Value="#333B44"/>
-            <Setter Property="BorderBrush" Value="#C8CCD0"/>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#F2F2F3"/>
-                    <Setter Property="BorderBrush" Value="#A9AEB4"/>
-                </Trigger>
-                <Trigger Property="IsPressed" Value="True">
-                    <Setter Property="Background" Value="#E4E5E7"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style x:Key="PrimaryButton" TargetType="Button" BasedOn="{StaticResource DialogButton}">
-            <Setter Property="Background" Value="#4A8FC7"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="BorderBrush" Value="#4A8FC7"/>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#3F7CAE"/>
-                    <Setter Property="BorderBrush" Value="#3F7CAE"/>
-                </Trigger>
-                <Trigger Property="IsPressed" Value="True">
-                    <Setter Property="Background" Value="#356A96"/>
-                    <Setter Property="BorderBrush" Value="#356A96"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
+        <!--The flat field look comes from WMSHelper.Wpf's FlatTextBox. Applied
+            here, rather than app-wide, so only this window's boxes get it. The
+            label and button styles used below come from the same library.-->
+        <Style TargetType="TextBox" BasedOn="{StaticResource FlatTextBox}"/>
 
     </Window.Resources>
 

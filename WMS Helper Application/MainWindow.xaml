@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WMS_Helper_Application"
-        xmlns:controls="clr-namespace:WMS_Helper_Application.UserControls"
+        xmlns:controls="clr-namespace:WMSHelper.Wpf.Controls;assembly=WMSHelper.Wpf"
         mc:Ignorable="d"
         Title="Item Picker" Height="600" Width="800" FontFamily="{StaticResource AppFont}"
         MinHeight="600" MinWidth="800">

@@ -4,14 +4,14 @@ using System.Windows;
 using System.Windows.Documents;
 using WMSHelper.Core.Models;
 
-namespace WMS_Helper_Application
+namespace WMSHelper.Wpf.Printing
 {
     /// <summary>
     /// Paginates the barcode report by laying out a XAML <see cref="BarcodeReportPage"/>
     /// and measuring how many rows fit within the printable area, splitting the
     /// remaining items onto further pages.
     /// </summary>
-    internal sealed class BarcodeDocumentPaginator : DocumentPaginator
+    public sealed class BarcodeDocumentPaginator : DocumentPaginator
     {
         private readonly List<BarcodeModel> _items;
         private Size _pageSize;

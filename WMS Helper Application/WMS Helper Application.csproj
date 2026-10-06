@@ -13,14 +13,12 @@
     <Folder Include="ViewModel\" />
   </ItemGroup>
 
-	<ItemGroup>
-		<Resource Include="MiscFiles\Fonts\**\*.ttf" />
-	</ItemGroup>
-
-	<!-- Model and SQLite data access. Dapper and Microsoft.Data.Sqlite
-	     (needed here for SqliteException) come through this reference. -->
+	<!-- Core: model and SQLite data access. Dapper and Microsoft.Data.Sqlite
+	     (needed here for SqliteException) come through this reference.
+	     Wpf: title bar, printing, fonts and the shared styles. -->
 	<ItemGroup>
 	  <ProjectReference Include="..\WMSHelper.Core\WMSHelper.Core.csproj" />
+	  <ProjectReference Include="..\WMSHelper.Wpf\WMSHelper.Wpf.csproj" />
 	</ItemGroup>
 
 </Project>

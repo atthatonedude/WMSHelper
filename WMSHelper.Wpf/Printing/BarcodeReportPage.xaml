@@ -1,9 +1,11 @@
-<UserControl x:Class="WMS_Helper_Application.BarcodeReportPage"
+<UserControl x:Class="WMSHelper.Wpf.Printing.BarcodeReportPage"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              Background="White"
-             FontFamily="{StaticResource AppFont}"
+             FontFamily="pack://application:,,,/WMSHelper.Wpf;component/Fonts/Barlow/#Barlow"
              FontSize="20">
+    <!--Fonts point straight at this library rather than at app resources, so
+        the report prints the same in any app, whatever its App.xaml holds.-->
     <StackPanel  Grid.IsSharedSizeScope="True" Margin="48">
 
         <TextBlock Text="Barcode Report"
@@ -43,7 +45,7 @@
                             <TextBlock Grid.Column="0" Text="{Binding ItemName}"                Padding="6,4"/>
                             <TextBlock Grid.Column="1" Text="{Binding ItemNumber}"              Padding="6,4"/>
                             <TextBlock Grid.Column="2" Text="{Binding ItemPurchaseOrderNumber}" Padding="6,4"/>
-                            <TextBlock Grid.Column="3" FontFamily="{StaticResource BarcodeFont}" Text="{Binding ItemNumberToBarcode}"     Padding="6,4"/>
+                            <TextBlock Grid.Column="3" FontFamily="pack://application:,,,/WMSHelper.Wpf;component/Fonts/#CarolinaBar-B39-2.5-50x158x720" Text="{Binding ItemNumberToBarcode}"     Padding="6,4"/>
                         </Grid>
                     </Border>
                 </DataTemplate>

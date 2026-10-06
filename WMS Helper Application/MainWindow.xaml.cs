@@ -5,6 +5,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using WMSHelper.Core.Models;
+using WMSHelper.Wpf.Printing;
 
 namespace WMS_Helper_Application
 {
@@ -140,14 +141,7 @@ namespace WMS_Helper_Application
                 return;
             }
 
-            var print = new System.Windows.Controls.PrintDialog();
-            if (print.ShowDialog() == true)
-            {
-                var pageSize  = new Size(print.PrintableAreaWidth, print.PrintableAreaHeight);
-                var paginator = new BarcodeDocumentPaginator(app.SelectedBarcodeModels, pageSize);
-
-                print.PrintDocument(paginator, "Barcode Report");
-            }
+            BarcodePrinter.Print(app.SelectedBarcodeModels);
         }
 
         

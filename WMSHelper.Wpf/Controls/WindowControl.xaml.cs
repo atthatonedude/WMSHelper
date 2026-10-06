@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WMS_Helper_Application.UserControls
+namespace WMSHelper.Wpf.Controls
 {
     /// <summary>
     /// Interaction logic for WindowControl.xaml

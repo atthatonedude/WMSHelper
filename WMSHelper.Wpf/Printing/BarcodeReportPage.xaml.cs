@@ -2,7 +2,7 @@ using System.Collections;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace WMS_Helper_Application
+namespace WMSHelper.Wpf.Printing
 {
     /// <summary>
     /// A single printable page of the barcode report. The set of rows shown on
