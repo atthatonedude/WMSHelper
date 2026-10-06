@@ -95,6 +95,8 @@ namespace WMSHelper.Core.Data
 
         // Explicit column list rather than SELECT *, so adding a column to the
         // table later can't silently change what gets mapped onto the model.
+        // COLLATE NOCASE because SQLite compares case-sensitively by default,
+        // which sorts every capitalised name ahead of every lowercase one.
         public List<BarcodeModel> GetAll()
         {
             using var connection = OpenConnection();
@@ -102,7 +104,7 @@ namespace WMSHelper.Core.Data
             return connection.Query<BarcodeModel>("""
                 SELECT Id, ItemName, ItemNumber, ItemPurchaseOrderNumber
                 FROM Barcodes
-                ORDER BY ItemName;
+                ORDER BY ItemName COLLATE NOCASE;
                 """).ToList();
         }
 
@@ -110,14 +112,7 @@ namespace WMSHelper.Core.Data
         {
             using var connection = OpenConnection();
 
-            // last_insert_rowid() runs on the same connection, so it returns the
-            // id from the INSERT above. Assigning it back means the caller's
-            // object can be updated or deleted afterwards.
-            item.Id = connection.ExecuteScalar<int>("""
-                INSERT INTO Barcodes (ItemName, ItemNumber, ItemPurchaseOrderNumber)
-                VALUES (@ItemName, @ItemNumber, @ItemPurchaseOrderNumber);
-                SELECT last_insert_rowid();
-                """, item);
+            item.Id = InsertRow(connection, item);
         }
 
         // One transaction for the whole batch. Without it SQLite syncs to disk
@@ -127,13 +122,34 @@ namespace WMSHelper.Core.Data
             using var connection = OpenConnection();
             using var transaction = connection.BeginTransaction();
 
-            connection.Execute("""
-                INSERT INTO Barcodes (ItemName, ItemNumber, ItemPurchaseOrderNumber)
-                VALUES (@ItemName, @ItemNumber, @ItemPurchaseOrderNumber);
-                """, items, transaction);
+            // Row by row so each item gets its generated id, the same as Insert.
+            var inserted = new List<(BarcodeModel Item, int Id)>();
+
+            foreach (var item in items)
+            {
+                inserted.Add((item, InsertRow(connection, item, transaction)));
+            }
 
             transaction.Commit();
+
+            // Only hand the ids out once the rows are really stored. If anything
+            // above throws, the transaction rolls back and every model keeps Id 0.
+            foreach (var (item, id) in inserted)
+            {
+                item.Id = id;
+            }
         }
+
+        // last_insert_rowid() runs on the same connection, so it returns the id
+        // from the INSERT just before it. Callers assign it back so the object
+        // can be updated or deleted afterwards.
+        private static int InsertRow(SqliteConnection connection, BarcodeModel item,
+            SqliteTransaction? transaction = null) =>
+            connection.ExecuteScalar<int>("""
+                INSERT INTO Barcodes (ItemName, ItemNumber, ItemPurchaseOrderNumber)
+                VALUES (@ItemName, @ItemNumber, @ItemPurchaseOrderNumber);
+                SELECT last_insert_rowid();
+                """, item, transaction);
 
         // Returns false when no row matched, so a caller working from a stale
         // list can tell the difference between "saved" and "that row is gone".

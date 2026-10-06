@@ -1,5 +1,6 @@
 using System.IO;
 using System.Linq;
+using Microsoft.Data.Sqlite;
 using WMSHelper.Core.Data;
 using WMSHelper.Core.Models;
 
@@ -88,6 +89,23 @@ namespace WMSHelper.Core.Tests
 
             Assert.Equal(
                 new[] { "alpha", "mike", "zeta" },
+                db.Connector.GetAll().Select(b => b.ItemName));
+        }
+
+        /// <summary>
+        /// Regression: SQLite compares case-sensitively by default, so the list
+        /// used to come back as Banana, apple, cherry.
+        /// </summary>
+        [Fact]
+        public void GetAll_orders_by_item_name_ignoring_case()
+        {
+            using var db = new TempDatabase();
+            db.Connector.Insert(Item("cherry"));
+            db.Connector.Insert(Item("Banana"));
+            db.Connector.Insert(Item("apple"));
+
+            Assert.Equal(
+                new[] { "apple", "Banana", "cherry" },
                 db.Connector.GetAll().Select(b => b.ItemName));
         }
 
@@ -182,6 +200,39 @@ namespace WMSHelper.Core.Tests
 
             db.Connector.InsertMany(Array.Empty<BarcodeModel>());
 
+            Assert.Empty(db.Connector.GetAll());
+        }
+
+        /// <summary>
+        /// Regression: InsertMany used to leave every model at Id 0, so editing
+        /// one threw and deleting one silently removed nothing.
+        /// </summary>
+        [Fact]
+        public void InsertMany_assigns_a_distinct_generated_id_to_every_model()
+        {
+            using var db = new TempDatabase();
+            var items = new[] { Item("a"), Item("b"), Item("c") };
+
+            db.Connector.InsertMany(items);
+
+            Assert.All(items, item => Assert.True(item.Id > 0));
+            Assert.Equal(3, items.Select(item => item.Id).Distinct().Count());
+
+            // Each id has to point at that model's own row, not just any row.
+            var stored = db.Connector.GetAll().ToDictionary(b => b.Id, b => b.ItemName);
+            Assert.All(items, item => Assert.Equal(item.ItemName, stored[item.Id]));
+        }
+
+        [Fact]
+        public void InsertMany_that_fails_part_way_stores_nothing_and_hands_out_no_ids()
+        {
+            using var db = new TempDatabase();
+            var good = Item("good");
+            var bad = new BarcodeModel { ItemName = null! }; // breaks NOT NULL
+
+            Assert.Throws<SqliteException>(() => db.Connector.InsertMany(new[] { good, bad }));
+
+            Assert.Equal(0, good.Id);
             Assert.Empty(db.Connector.GetAll());
         }
 
