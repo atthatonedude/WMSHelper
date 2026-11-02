@@ -1,0 +1,82 @@
+﻿<UserControl x:Class="WMSHelper.ShellView.SecondWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WMSHelper.ShellView"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <!--remove second window text block after release-->
+        
+
+        <!--<ListBox x:Name="PrintListBox" Grid.Column="1" Margin="10,50,10,10" ItemsSource="{Binding PrintList}" DisplayMemberPath="Name" SelectionMode="Multiple"/>-->
+        <ListBox ItemsSource="{Binding PrintList}" 
+             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 Grid.Column="1">
+
+            <!-- Make items flow like tiles -->
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel IsItemsHost="True" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+
+            <!-- Custom Tile Design for each Item -->
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Margin" Value="5"/>
+                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <Border x:Name="HostPanel" Width="100" Height="110"
+                                    Background="#F0F0F0" 
+                                    BorderBrush="#CCCCCC" 
+                                    BorderThickness="1" 
+                                    CornerRadius="4"
+                                    Padding="5">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <!-- File/Folder Icon -->
+                                        <Image Source="{Binding Icon}" 
+                                           Width="48" Height="48" 
+                                           HorizontalAlignment="Center" 
+                                           VerticalAlignment="Center"/>
+
+                                        <!-- File/Folder Name -->
+                                        <TextBlock Text="{Binding Name}" 
+                                               Grid.Row="1" 
+                                               TextAlignment="Center" 
+                                               TextTrimming="CharacterEllipsis" 
+                                               FontSize="12" 
+                                               Margin="0,4,0,0"/>
+                                    </Grid>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" TargetName="HostPanel" Value="#007ACC"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+    </Grid>
+
+    <!--<TextBox x:Name="PrinterNameTextBox" Width="80" Height="20" Margin="280,45,340,0" Grid.Column="1" VerticalAlignment="Top" Background="Blue"/>-->
+    
+
+</UserControl>

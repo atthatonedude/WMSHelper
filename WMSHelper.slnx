@@ -4,5 +4,6 @@
   </Folder>
   <Project Path="WMS Helper Application/WMS Helper Application.csproj" />
   <Project Path="WMSHelper.Core/WMSHelper.Core.csproj" />
+  <Project Path="WMSHelper.ShellView/WMSHelper.ShellView.csproj" Id="d6751ab5-4f7c-4e1f-b90c-e41fcab9261c" />
   <Project Path="WMSHelper.Wpf/WMSHelper.Wpf.csproj" />
 </Solution>

@@ -1,0 +1,63 @@
+<Window x:Class="WpfFileTiles.MainWindow"
+        xmlns="http://microsoft.com"
+        xmlns:x="http://microsoft.com"
+        Title="File Tiles Explorer" Height="450" Width="800">
+    <Grid Margin="10">
+        <ListBox ItemsSource="{Binding FileList}" 
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            
+            <!-- Make items flow like tiles -->
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel IsItemsHost="True" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+
+            <!-- Custom Tile Design for each Item -->
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Margin" Value="5"/>
+                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <Border Width="100" Height="110" 
+                                        Background="#F0F0F0" 
+                                        BorderBrush="#CCCCCC" 
+                                        BorderThickness="1" 
+                                        CornerRadius="4"
+                                        Padding="5">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        
+                                        <!-- File/Folder Icon -->
+                                        <Image Source="{Binding Icon}" 
+                                               Width="48" Height="48" 
+                                               HorizontalAlignment="Center" 
+                                               VerticalAlignment="Center"/>
+                                        
+                                        <!-- File/Folder Name -->
+                                        <TextBlock Text="{Binding Name}" 
+                                                   Grid.Row="1" 
+                                                   TextAlignment="Center" 
+                                                   TextTrimming="CharacterEllipsis" 
+                                                   FontSize="12" 
+                                                   Margin="0,4,0,0"/>
+                                    </Grid>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" TargetName="HostPanel" Value="#007ACC"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+    </Grid>
+</Window>

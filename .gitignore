@@ -372,3 +372,5 @@ sqlite-notes.md
 *.db
 *.db-shm
 *.db-wal
+*.docx
+*.pdf
